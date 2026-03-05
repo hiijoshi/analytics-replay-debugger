@@ -1,0 +1,4 @@
+.env
+vendor/
+storage/*.sqlite
+storage/*.log
