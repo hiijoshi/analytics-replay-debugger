@@ -1,99 +1,167 @@
-# Analytics Replay & Debugger
+Analytics Replay & Debugger
 
-A CLI tool for debugging and replaying analytics events.
+Analytics Replay & Debugger is a CLI tool built in PHP that helps developers debug, inspect, and replay analytics events.
 
-This tool simulates an analytics ingestion pipeline with event validation,
-timeline inspection, funnel analysis, and replay to Mixpanel.
+It simulates how analytics events move through a system and allows developers to test if events are correctly sent to Mixpanel.
 
----
+This tool is useful when developers want to test analytics tracking without using real production data.
 
-## Features
+Features
 
-✔ Event Simulation  
-✔ Event Timeline Inspection  
-✔ Schema Validation  
-✔ Funnel Analysis  
-✔ Event Replay  
-✔ User Journey Graph  
-✔ Mixpanel Integration  
+Event Simulation – simulate user actions
 
----
+Event Timeline – see events in order
 
-## Architecture
+Schema Validation – check if events follow correct format
 
+Duplicate Detection – detect repeated events
 
-Then add this diagram:
+Funnel Analysis – see user conversion flow
+
+Event Replay – resend events to Mixpanel
+
+User Journey Graph – visualize user activity
+
+Mixpanel Integration – send analytics data to Mixpanel
+
+Architecture
+
+This tool follows a simple analytics pipeline.
 
 Application
-     ↓
+     |
+     v
 Event Capture
-     ↓
+     |
+     v
 Schema Validator
-     ↓
+     |
+     v
 Duplicate Detector
-     ↓
+     |
+     v
 Event Store (SQLite)
-     ↓
+     |
+     v
 Replay Engine
-     ↓
+     |
+     v
 Mixpanel API
 
-Continue README:
+Explanation:
 
----
+Application – where events are generated
 
-## Installation
+Event Capture – collects events
 
-Clone repository:
+Schema Validator – checks event structure
 
-```bash
+Duplicate Detector – prevents repeated events
+
+Event Store – saves events in SQLite database
+
+Replay Engine – resends events for testing
+
+Mixpanel API – sends events to Mixpanel
+
+Project Structure
+analytics-replay-debugger
+
+bin/
+ └ ard.php            CLI entry file
+
+src/
+ ├ CLI                command logic
+ ├ Core               main analytics logic
+ ├ Mixpanel           Mixpanel integration
+ ├ Storage            SQLite storage
+ ├ Validation         event validation
+ └ Simulate           event simulation
+
+storage/              database files
+
+composer.json
+README.md
+.env
+Installation
+
+Clone the project
+
 git clone https://github.com/YOUR_USERNAME/analytics-replay-debugger.git
 cd analytics-replay-debugger
+
+Install dependencies
+
 composer install
 Environment Setup
 
-Create .env file:
+Create a .env file.
 
 MIXPANEL_PROJECT_TOKEN=YOUR_TOKEN
 ANALYTICS_ENABLED=true
+
+Replace YOUR_TOKEN with your Mixpanel project token.
+
 CLI Commands
 Simulate user journey
 php bin/ard.php simulate --user=user_123 --company=c_101
-Show timeline
+
+This command creates test events for a user.
+
+View event timeline
 php bin/ard.php timeline --user=user_123
+
+Shows all events in order for the user.
+
 Validate events
 php bin/ard.php validate --user=user_123
-Replay events to Mixpanel
+
+Checks if events follow the correct schema.
+
+Replay events
 php bin/ard.php replay --user=user_123
-Inspect analytics
+
+Sends stored events to Mixpanel.
+
+Inspect analytics events
 php bin/ard.php inspect --user=user_123
+
+Shows detailed event information.
+
 Funnel analysis
 php bin/ard.php funnel --user=user_123
+
+Analyzes user conversion steps.
+
 User journey graph
 php bin/ard.php graph --user=user_123
-Example Output
-USER JOURNEY GRAPH
+
+Example output
+
+USER JOURNEY
 
 account_created
-      ↓
+   ↓
 vendor_invite_sent
-      ↓
+   ↓
 order_completed
 Use Cases
 
 This tool helps developers:
 
-Debug analytics pipelines
+Debug analytics tracking
+
+Test analytics pipelines
 
 Replay user events
 
 Validate event schema
 
-Analyze conversion funnels
+Analyze funnels
 
-Simulate user journeys
+Verify Mixpanel integration
 
-Technologies
+Technologies Used
 
 PHP
 
@@ -102,91 +170,3 @@ SQLite
 Mixpanel API
 
 CLI Architecture
-
-License
-
-MIT
-
-
----
-
-# 3️⃣ Add Architecture Diagram (better version)
-
-You can include this in README:
-
-    +-------------------+
-    |   Application     |
-    +-------------------+
-             |
-             v
-    +-------------------+
-    |  Event Capture    |
-    +-------------------+
-             |
-             v
-    +-------------------+
-    | Schema Validator  |
-    +-------------------+
-             |
-             v
-    +-------------------+
-    | Event Store       |
-    |   (SQLite)        |
-    +-------------------+
-             |
-             v
-    +-------------------+
-    | Replay Engine     |
-    +-------------------+
-             |
-             v
-    +-------------------+
-    |  Mixpanel API     |
-    +-------------------+
-
-This looks **very professional**.
-
----
-
-# 4️⃣ CLI Usage Examples (Add Screenshot Section)
-
-Add this to README:
-
-```markdown
-## CLI Usage Examples
-
-Simulate user events:
-
-
-php bin/ard.php simulate --user=user_123 --company=c_101
-
-
-View user timeline:
-
-
-php bin/ard.php timeline --user=user_123
-
-
-Replay events:
-
-
-php bin/ard.php replay --user=user_123
-
-5️⃣ Final Result
-
-Your GitHub project will look like:
-
-analytics-replay-debugger
- ├── bin
- │   └── ard.php
- ├── src
- │   ├── CLI
- │   ├── Core
- │   ├── Mixpanel
- │   ├── Storage
- │   ├── Validation
- │   └── Simulate
- ├── storage
- ├── README.md
- ├── composer.json
- └── .env
